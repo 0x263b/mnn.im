@@ -1,0 +1,143 @@
+h1 tt, h1 code,
+h2 tt, h2 code,
+h3 tt, h3 code,
+h4 tt, h4 code,
+h5 tt, h5 code,
+h6 tt, h6 code {
+	font-size: inherit; }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+	margin-bottom: .5rem;
+	line-height: 1.25;
+	color: #fff;
+	font-weight: 500;
+	text-rendering: optimizeLegibility;
+}
+h1 {
+	font-size: 2rem;
+}
+h2 {
+	margin-top: 1rem;
+	font-size: 1.5rem;
+}
+h3 {
+	margin-top: 1.5rem;
+	font-size: 1.25rem;
+}
+h4, h5, h6 {
+	margin-top: 1rem;
+	font-size: 1rem;
+}
+
+
+hr {
+  position: relative;
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: 1px solid #2A2A33;
+  border-bottom: 1px solid #2A2A33; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+	margin-top: 0; }
+
+/* Lists */
+ul, ol, dl {
+	margin: 1rem 0; }
+li { margin: 0.2rem 0; }
+
+dt {
+	font-weight: bold; }
+dd {
+	margin-bottom: .5rem; }
+
+p {
+	margin: 0;
+	padding: 0.5rem 0;
+}
+
+/* Quotes */
+blockquote {
+	padding: .5rem 1rem;
+	margin: .8rem 0;
+	color: #90a4ae;
+	border-left: .25rem solid #37474f; }
+	blockquote p:first-child {
+		padding-top: 0;
+	}
+	blockquote p:last-child {
+		padding-bottom: 0;
+	}
+
+@media (min-width: 30rem) {
+	blockquote {
+		padding-right: 5rem;
+		padding-left: 1.25rem;
+	}
+}
+
+/* Tables */
+table {
+	margin-bottom: 1rem;
+	width: 100%;
+	border: 1px solid #42424f;
+	border-collapse: collapse; }
+	th { font-weight: 600; }
+	td, th {
+		padding: .25rem .5rem;
+		border: 1px solid #42424f; }
+	tbody tr:nth-child(odd) td,
+	tbody tr:nth-child(odd) th {
+		background-color: #2A2A33; }
+
+img {
+	max-width: 100%; }
+
+fieldset, img {
+	border:0; }
+
+code, tt {
+	margin: 0 2px;
+	padding: 0 5px;
+	white-space: nowrap;
+	border-radius: 3px;
+	background-color: #2A2A33; }
+
+pre code {
+	margin: 0;
+	padding: 0;
+	white-space: pre;
+	border: none;
+	background: transparent; }
+
+pre {
+	background-color: #2A2A33;
+	font-size: 13px;
+	line-height: 19px;
+	overflow: auto;
+	padding: 10px 20px;
+	margin: 15px 0; }
+	pre code, pre tt {
+		background-color: transparent;
+		border: none; }
+
+del {
+	text-decoration: line-through; }
+
+sub, sup {
+	font-size:75%;
+	position:relative;
+	vertical-align:text-top; }
+
+:root sub, :root sup {
+	vertical-align:baseline; }
+
+sup {
+	top:-.5em; }
+
+sub {
+	bottom:-.25em; }
+
+strong {
+	font-weight: 700;
+}

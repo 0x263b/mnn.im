@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<title>API / mnn.im</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+	<link rel="stylesheet" type="text/css" href="/markdown.css" />
+
+</head>
+<body style="overflow:visible">
+
+<header>
+    <div class="logo">
+        <a class="new" href="/">New</a>
+        <a href="/api">API</a>
+        <a href="/about">About</a>
+    </div>
+    <div class="form-inputs">
+        &nbsp;
+    </div>
+
+    <div class="option-buttons">
+        &nbsp;
+    </div>
+</header>
+
+<div class="api">
+
+<h1 id="mnn.imapi">mnn.im API</h1>
+
+<h3 id="allpastesandshorturlsexpireafter14days">All pastes and short urls expire after 14 days</h3>
+
+<hr />
+
+<h2 id="paste">Paste</h2>
+
+<p>Send a POST request to <code>http://mnn.im/c</code> with the following fields:</p>
+
+<ul>
+<li><code>paste</code></li>
+<li><code>title</code> (optional)</li>
+<li><code>lang</code> (optional, default is <code>text</code>)</li>
+<li><code>life</code> Paste lifetime in seconds. Must be between <code>60</code> and <code>2592000</code> (optional, default is <code>1209600</code>)</li>
+</ul>
+
+<p>Valid language codes: <code>text</code>, <code>c_cpp</code>, <code>clojure</code>, <code>coffee</code>, <code>css</code>, <code>csharp</code>, <code>golang</code>, <code>haskell</code>, <code>html</code>, <code>html_ruby</code>, <code>java</code>, <code>javascript</code>, <code>json</code>, <code>llvm</code>, <code>lua</code>, <code>markdown</code>, <code>objectivec</code>, <code>perl</code>, <code>php</code>, <code>python</code>, <code>ruby</code>, <code>rust</code>, <code>sh</code>. </p>
+
+<p>If you post the filename extension as <code>lang</code>, it will try match it with the appropriate code. </p>
+
+<p>A successful response will return data like this:</p>
+
+<pre><code>{
+    &quot;paste&quot;:{
+        &quot;id&quot;: &quot;abcd&quot;,
+        &quot;link&quot;: &quot;http://mnn.im/pabcd&quot;,
+        &quot;raw&quot;: &quot;http://mnn.im/rabcd&quot;,
+        &quot;lang_code&quot;: &quot;text&quot;,
+        &quot;expiration_date&quot;: &quot;2014-06-24T00:07:42.000+00:00&quot;
+    },
+    &quot;status&quot;: &quot;success&quot;
+}
+</code></pre>
+
+<p>And a failed response will return this:</p>
+
+<pre><code>{
+    &quot;error_code&quot;: 1,
+    &quot;status&quot;: &quot;error&quot;
+}
+</code></pre>
+
+<h3 id="markdown">Markdown</h3>
+
+<p>If the paste lang is <code>markdown</code> the response will include a formatted URL: </p>
+
+<pre><code>{
+    &quot;paste&quot;:{
+        &quot;id&quot;: &quot;abcd&quot;,
+        &quot;link&quot;: &quot;http://mnn.im/pabcd&quot;,
+        &quot;raw&quot;: &quot;http://mnn.im/rabcd&quot;,
+        &quot;lang_code&quot;: &quot;markdown&quot;,
+        &quot;formatted&quot;: &quot;http://mnn.im/fabcd&quot;,
+        &quot;expiration_date&quot;: &quot;2014-06-24T00:07:42.000+00:00&quot;
+    },
+    &quot;status&quot;: &quot;success&quot;
+}
+</code></pre>
+
+<h3 id="pasteviacurl">Paste via cURL</h3>
+
+<pre><code>curl --data-urlencode paste@example_file.py http://mnn.im/c
+</code></pre>
+
+<h3 id="rubyexample">Ruby example</h3>
+
+<pre><code># paste.rb
+# Usage: ruby paste.rb some_file.txt
+
+require 'uri'
+require 'net/http'
+require 'json'
+
+def paste(text, title=&quot;&quot;, lang_code=&quot;text&quot;)
+    paste_data = Net::HTTP.post_form(URI.parse(&quot;http://mnn.im/c&quot;), {&quot;paste&quot; =&gt; text, &quot;title&quot; =&gt; title, &quot;lang&quot; =&gt; lang_code})
+    parsed = JSON.parse(paste_data.body)
+    return parsed[&quot;paste&quot;][&quot;link&quot;]
+end
+
+ARGV.each do|arg|
+    file = File.read(arg)
+    ext  = File.extname(arg).delete('.')
+    puts paste(file, arg, ext)
+end
+</code></pre>
+
+<h3 id="shellscript"><a href="//mnn.im/mnn.sh">Shell script</a></h3>
+
+<hr />
+
+<h2 id="shortenurl">Shorten URL</h2>
+
+<p>Send a POST request to <code>http://mnn.im/s</code> with your long URL.</p>
+
+<p>A successful response will return data like this:</p>
+
+<pre><code>{
+    &quot;url&quot;: {
+        &quot;id&quot;: &quot;wxyz&quot;,
+        &quot;short_url&quot;: &quot;http://mnn.im/uwxyz&quot;,
+        &quot;long_url&quot;: &quot;https://boards.4chan.org/g/catalog&quot;,
+        &quot;expiration_date&quot;: &quot;2014-06-24T00:07:42.000+00:00&quot;
+    },
+    &quot;status&quot;: &quot;success&quot;
+}
+</code></pre>
+
+<p>And a failed response will return this:</p>
+
+<pre><code>{
+    &quot;error_code&quot;: 1,
+    &quot;status&quot;: &quot;error&quot;
+}
+</code></pre>
+
+<h3 id="shortenviacurl">Shorten via cURL</h3>
+
+<pre><code>curl -d &quot;http://example.com&quot; http://mnn.im/s
+</code></pre>
+
+</div>
+</body>
+</html>

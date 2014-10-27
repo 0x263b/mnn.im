@@ -1,0 +1,206 @@
+* {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+body {
+	overflow: hidden;
+	font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+	background-color: #19191F;
+	color: #eceff1;
+	margin: 0;
+}
+
+input, button, option {
+	font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+	font-size: 13px;
+}
+
+a {
+	color: #26c6da;
+	text-decoration: none;
+}
+
+header {
+	background-color: #2A2A33;
+	display: table;
+	width: 100%;
+	border-spacing: 0;
+	padding: 10px 20px;
+}
+
+	header .logo,
+	header .form-inputs,
+	header .option-buttons {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	header .logo {
+		width: 200px;
+		line-height: 31px;
+	}
+
+		header .logo a {
+			margin-right: 10px;
+			color: #fff;
+		}
+
+	header .option-buttons {
+		width: 200px;
+		text-align: right;
+	}
+
+		header input[type="text"] {
+			background-color: #515166;
+			color: #fff;
+			border: 1px solid #19191F;
+			line-height: 29px;
+			padding: 0 10px;
+			width: 200px;
+		}
+
+		header input[type="text"]:focus {
+			outline: none;
+		}
+
+	header #save,
+	header .raw,
+	header .formatted {
+		font-size: 12px;
+		font-weight: 500;
+		padding: 0 15px;
+		line-height: 30px;
+		display: inline-block;
+		line-height: 31px;
+		vertical-align: top;
+	}
+
+	#save {
+		background-color: #19191F;
+		color: #fff;
+	}
+
+	.raw, .formatted {
+		color: #eceff1;
+		background: #515166;
+		margin-left: 5px;
+	}
+
+
+
+#paste_body, .hidden {
+	display: none;
+}
+
+#ace-editor { 
+	margin: 0;
+	position: absolute;
+	top: 52px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+
+.api {
+	padding: 50px 20px;
+	max-width: 680px;
+	margin: auto;
+}
+
+.markdown {
+	padding: 50px 20px;
+	max-width: 680px;
+	margin: auto;
+}
+
+	.markdown a:hover,
+	.markdown a:focus {
+		text-decoration: underline;
+	}
+
+/* This is some shit */
+
+
+.custom-select {
+	background-color: #515166;
+	border: 1px solid #19191F;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0 5px;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	z-index: 1;
+	display: inline-block;
+	vertical-align: top;
+	width: 200px;
+	font-size: 13px;
+}
+
+.custom-select:hover {
+	border-color: #19191F;
+}
+
+.custom-select:before {
+	color: #19191F;
+	display: block;
+	font-family: 'fontello';
+	font-size: 1em;
+	height: 100%;
+	line-height: 2.5em;
+	padding: 0 5px;
+	position: absolute;
+	top: 0;
+	right: -0.2em;
+	text-align: center;
+	width: 1em;
+	z-index: -1;
+}
+
+.custom-select select {
+	background-color: transparent;
+	border: 0 none;
+	box-shadow: none;
+	color: #fff;
+	display: block;
+	font-size: 100%;
+	line-height: normal;
+	margin: 0;
+	padding: 0 .5em;
+	width: 100%;
+	height: 29px;
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+	        appearance: none;
+}
+
+.custom-select select::-ms-expand {
+	display: none; /* to ie 10 */
+}
+
+.custom-select select:focus {
+	outline: none;
+}
+
+.custom-select option {
+	background-color: #515166;
+	color: #fff;
+}
+
+.custom-select option:hover {
+	background-color: #121217;
+}
+
+/* little trick for custom select elements in mozilla firefox  17/06/2014 @rodrigoludgero */
+
+/* pseudo class https://developer.mozilla.org/en-US/docs/Web/CSS/:any */
+
+:-moz-any(.custom-select):before {
+	background-color: #515166; /* this is necessary for overcome the caret default browser */
+	pointer-events: none; /* https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events  */
+	z-index: 1; /* this is necessary for overcome the pseudo element */
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="robots" content="noarchive" />
+	<meta name="googlebot" content="noarchive" />
+
+	<title><%= @paste.title %> / mnn.im</title>
+
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+	<link rel="stylesheet" type="text/css" href="/markdown.css" />
+
+</head>
+<body style="overflow:visible">
+
+<header>
+	<div class="logo">
+		<a class="new" href="/">New</a>
+		<a href="/api">API</a>
+		<a href="/about">About</a>
+	</div>
+	<div class="form-inputs">
+		&nbsp;
+	</div>
+
+	<div class="option-buttons">
+		<!-- <a id="date" data-created='<%= @paste.created_at %>'></a> -->
+		<a class="raw" href="/r<%= @paste.short %>">Raw</a>
+		<a class="formatted" href="/p<%= @paste.short %>">Edit</a>
+	</div>
+</header>
+
+<div class="markdown">
+<%= @formatted %>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+
+// Select url
+$("#link").click(function() {
+	$("#link").select();
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="robots" content="noarchive" />
+	<meta name="googlebot" content="noarchive" />
+
+	<title>mnn.im - Temporary paste bin</title>
+	<meta name="description" content="mnn.im - A temporary paste bin with an easy to use API" />
+
+	<link rel="stylesheet" type="text/css" href="/fontello.css" />
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+
+</head>
+<body>
+
+<div id="cover"></div>
+
+<form action="/p" method="POST">
+<header>
+	<div class="logo">
+		<a class="new" href="/">New</a>
+		<a href="/api">API</a>
+		<a href="/about">About</a>
+	</div>
+	<div class="form-inputs">
+		<input type="text" name="paste_title" value="" placeholder="name this paste" />
+
+		<div class="custom-select icon-down-dir">
+			<select name="paste_high" id="paste_high">
+				<option value="text">Text</option>
+				<option value="c_cpp">C/C++</option>
+				<option value="clojure">Clojure</option>
+				<option value="coffee">CoffeeScript</option>
+				<option value="css">CSS</option>
+				<option value="csharp">C#</option>
+				<option value="golang">Go</option>
+				<option value="haskell">Haskell</option>
+				<option value="html">HTML</option>
+				<option value="html_ruby">HTML Ruby</option>
+				<option value="java">Java</option>
+				<option value="javascript" selected>Javascript</option>
+				<option value="json">JSON</option>
+				<option value="llvm">LLVM</option>
+				<option value="lua">Lua</option>
+				<option value="markdown">Markdown</option>
+				<option value="objectivec">Objective-C</option>
+				<option value="perl">Perl</option>
+				<option value="php">PHP</option>
+				<option value="python">Python</option>
+				<option value="ruby">Ruby</option>
+				<option value="rust">Rust</option>
+				<option value="sh">Shell</option>
+				<option value="xml">XML</option>
+			</select>
+		</div>
+
+		<a id="save" href="/">Save</a>
+	</div>
+	<div class="option-buttons">
+		&nbsp;
+	</div>
+</header>
+
+<div class="paste">
+	<textarea name="paste_body" id="paste_body" rows="20"></textarea>
+	<pre id="ace-editor"></pre>
+	<input type="submit" class="hidden" value="Save"/>
+</div>
+</form>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+var editor = ace.edit("ace-editor");
+var str = null;
+
+$("#paste_high").change(function() {
+	$("#paste_high option:selected").each(function() {
+		str = $(this).val();
+	});
+	editor.getSession().setMode("ace/mode/" + str);
+}).change();
+
+
+// Save button
+$('#save').click(function(){
+	$('form').submit();
+	return false;
+});
+
+$('#lights').click(function(){
+	editor.setTheme("ace/theme/chrome");
+	return false;
+});
+
+
+$(document).ready(function(){
+
+	$("#paste_high option:selected").each(function() {
+		str = $(this).val();
+	});
+
+	editor.setTheme("ace/theme/mnnim");
+	editor.getSession().setMode("ace/mode/" + str);
+	editor.getSession().setTabSize(4);
+	editor.setShowPrintMargin(false);
+	editor.getSession().setUseWorker(false); // Remove syntax checkers
+	editor.renderer.setScrollMargin(10, 10, 0, 0); // Top and bottom padding
+
+	var textarea = $('#paste_body');
+	editor.getSession().setValue(textarea.val());
+	editor.getSession().on('change', function(){
+		textarea.val(editor.getSession().getValue());
+	});
+});
+
+</script>
+
+</body>
+</html>
